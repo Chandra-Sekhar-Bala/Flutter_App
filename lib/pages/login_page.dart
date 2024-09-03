@@ -1,45 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_test/utils/routes.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var name = "";
 
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: const Color(0xFFFFFFFF),
+        color: Colors.white,
         child: SingleChildScrollView(
           child: Column(children: [
             Image.asset(
               "assets/images/img_login.png",
               fit: BoxFit.cover,
             ),
-            Container(
-              height: 10,
-              color: Colors.blue,
+            const SizedBox(
+              height: 15,
             ),
-            const Text(
-              "Welcome",
-              style: TextStyle(fontSize: 20),
+            Text(
+              textAlign: TextAlign.center,
+              "Welcome\n$name",
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
             ),
             Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18),
-          child: Column(
-            children: [
-              TextFormField(
-                decoration: const InputDecoration(
-                    hintText: "Enter name", labelText: "Name"),
-              ),
-              TextFormField(
-                obscureText: true,
-                decoration: const InputDecoration(
-                  hintText: "Enter Password",
-                  labelText: "Password",
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 18),
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                        hintText: "Enter name", labelText: "Name"),
+                    onChanged: (value) {
+                      name = value;
+                      setState(() {});
+                    },
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      hintText: "Enter Password",
+                      labelText: "Password",
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.pushNamed(context, MyRoutes.homeRoute);
