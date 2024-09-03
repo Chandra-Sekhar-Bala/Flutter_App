@@ -7,20 +7,21 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Material(
       color: const Color(0xFFFFFFFF),
-      child: Column(children: [
-        Image.asset(
-          "assets/images/img_login.png",
-          fit: BoxFit.cover,
-        ),
-        Container(
-          height: 10,
-          color: Colors.blue,
-        ),
-        const Text(
-          "Welcome",
-          style: TextStyle(fontSize: 20),
-        ),
-        Padding(
+        child: SingleChildScrollView(
+          child: Column(children: [
+            Image.asset(
+              "assets/images/img_login.png",
+              fit: BoxFit.cover,
+            ),
+            Container(
+              height: 10,
+              color: Colors.blue,
+            ),
+            const Text(
+              "Welcome",
+              style: TextStyle(fontSize: 20),
+            ),
+            Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18),
           child: Column(
             children: [
@@ -38,23 +39,25 @@ class LoginPage extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    print("User Tried to Login");
-                  },
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: Colors.white,
-                    backgroundColor: Colors.blueAccent,
+                  ElevatedButton(
+                    onPressed: () {
+                      print("User Tried to Login");
+                    },
+                    style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                        backgroundColor: Colors.blueAccent,
+                        minimumSize: const Size(double.infinity, 40)),
+                    child: const Text(
+                      "Login",
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
-                  child: const Text("Login"),
-                ),
-              )
-            ],
-          ),
-        )
-      ]),
-    );
+                ],
+              ),
+            )
+          ]),
+        ));
   }
 }

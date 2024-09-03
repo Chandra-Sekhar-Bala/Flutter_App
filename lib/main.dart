@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       darkTheme: ThemeData(brightness: Brightness.dark),
       theme: ThemeData(primarySwatch: Colors.red,
-        textTheme: GoogleFonts.mondaTextTheme()
+        textTheme: GoogleFonts.latoTextTheme()
       ),
       routes: {
         "login": (context) => const HomePage(),
