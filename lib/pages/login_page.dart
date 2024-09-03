@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_test/utils/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -56,52 +55,37 @@ class _LoginPageState extends State<LoginPage> {
                     height: 20,
                   ),
                   // Can Wrap around with Gesture detector(Do not give feedback on click)/ InkWell
-                  GestureDetector(
-                    onTap: () async {
-                      setState(() {
-                        isButtonClicked = !isButtonClicked;
-                      });
-                      await Future.delayed(const Duration(seconds: 1));
-                      await Navigator.pushNamed(context, MyRoutes.homeRoute);
-                      setState(() {
-                        isButtonClicked = !isButtonClicked;
-                      });
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(seconds: 1),
-                      width: isButtonClicked ? 60 : 150,
-                      height: 60,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius:
+                  Material(
+                    color: Colors.blue,
+                    borderRadius:
                         BorderRadius.circular(isButtonClicked ? 60 : 10),
-                        // shape: buttonClicked? BoxShape.circle: BoxShape.rectangle,
-                      ),
-                      child: isButtonClicked
-                          ? const Icon(Icons.done, color: Colors.white)
-                          : const Text(
-                        "Login",
-                        style:
-                        TextStyle(fontSize: 20, color: Colors.white),
+                    // shape: buttonClicked? BoxShape.circle: BoxShape.rectangle,
+                    child: InkWell(
+                      onTap: () async {
+                        setState(() {
+                          isButtonClicked = !isButtonClicked;
+                        });
+                        await Future.delayed(const Duration(seconds: 1));
+                        // await Navigator.pushNamed(context, MyRoutes.homeRoute);
+                        // setState(() {
+                        //   isButtonClicked = !isButtonClicked;
+                        // });
+                      },
+                      child: AnimatedContainer(
+                        duration: const Duration(seconds: 1),
+                        width: isButtonClicked ? 50 : 150,
+                        height: 50,
+                        alignment: Alignment.center,
+                        child: isButtonClicked
+                            ? const Icon(Icons.done, color: Colors.white)
+                            : const Text(
+                                "Login",
+                                style: TextStyle(
+                                    fontSize: 20, color: Colors.white),
+                              ),
                       ),
                     ),
                   )
-                  // ElevatedButton(
-                  //   onPressed: () {
-                  //     Navigator.pushNamed(context, MyRoutes.homeRoute);
-                  //   },
-                  //   style: TextButton.styleFrom(
-                  //       foregroundColor: Colors.white,
-                  //       backgroundColor: Colors.blueAccent,
-                  //       minimumSize: const Size(double.infinity, 40)),
-                  //   child: const Text(
-                  //     "Login",
-                  //     style: TextStyle(
-                  //       fontSize: 18,
-                  //     ),
-                  //   ),
-                  // ),
                 ],
               ),
             )
