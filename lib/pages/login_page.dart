@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_test/utils/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -12,12 +13,32 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var name = "";
   var isButtonClicked = false;
+  final _formKey = GlobalKey<FormState>();
+
+  bool validateInput(String? value) {
+    return value != null && value.isNotEmpty && value.length > 5;
+  }
+
+  void moveToHome(BuildContext context) async {
+    if (_formKey.currentState!.validate()) {
+      setState(() {
+        isButtonClicked = !isButtonClicked;
+      });
+      await Future.delayed(const Duration(seconds: 1));
+      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+      setState(() {
+        isButtonClicked = !isButtonClicked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Material(
         color: Colors.white,
         child: SingleChildScrollView(
+            child: Form(
+          key: _formKey,
           child: Column(children: [
             Image.asset(
               "assets/images/img_login.png",
@@ -39,9 +60,15 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: const InputDecoration(
                         hintText: "Enter name", labelText: "Name"),
                     onChanged: (value) async {
-                      await(Future.delayed(const Duration(milliseconds: 200)));
+                      await (Future.delayed(const Duration(milliseconds: 200)));
                       name = value;
                       setState(() {});
+                    },
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Name cannot be empty";
+                      }
+                      return null;
                     },
                   ),
                   TextFormField(
@@ -50,6 +77,12 @@ class _LoginPageState extends State<LoginPage> {
                       hintText: "Enter Password",
                       labelText: "Password",
                     ),
+                    validator: (value) {
+                      if (!validateInput(value)) {
+                        return "Password length must be more then 5";
+                      }
+                      return null;
+                    },
                   ),
                   const SizedBox(
                     height: 20,
@@ -61,16 +94,7 @@ class _LoginPageState extends State<LoginPage> {
                         BorderRadius.circular(isButtonClicked ? 60 : 10),
                     // shape: buttonClicked? BoxShape.circle: BoxShape.rectangle,
                     child: InkWell(
-                      onTap: () async {
-                        setState(() {
-                          isButtonClicked = !isButtonClicked;
-                        });
-                        await Future.delayed(const Duration(seconds: 1));
-                        // await Navigator.pushNamed(context, MyRoutes.homeRoute);
-                        // setState(() {
-                        //   isButtonClicked = !isButtonClicked;
-                        // });
-                      },
+                      onTap: () => moveToHome(context),
                       child: AnimatedContainer(
                         duration: const Duration(seconds: 1),
                         width: isButtonClicked ? 50 : 150,
@@ -90,6 +114,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             )
           ]),
-        ));
+        )));
   }
 }
