@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_test/utils/routes.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -41,7 +42,7 @@ class LoginPage extends StatelessWidget {
               ),
                   ElevatedButton(
                     onPressed: () {
-                      print("User Tried to Login");
+                      Navigator.pushNamed(context, MyRoutes.homeRoute);
                     },
                     style: TextButton.styleFrom(
                         foregroundColor: Colors.white,
