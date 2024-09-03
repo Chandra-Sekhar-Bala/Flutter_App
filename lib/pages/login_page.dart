@@ -61,14 +61,16 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         isButtonClicked = !isButtonClicked;
                       });
-                      await(Future.delayed(const Duration(seconds: 1)));
-                      Navigator.pushNamed(
-                          context, MyRoutes.homeRoute);
+                      await Future.delayed(const Duration(seconds: 1));
+                      await Navigator.pushNamed(context, MyRoutes.homeRoute);
+                      setState(() {
+                        isButtonClicked = !isButtonClicked;
+                      });
                     },
                     child: AnimatedContainer(
                       duration: const Duration(seconds: 1),
                       width: isButtonClicked ? 60 : 150,
-                      height: 50,
+                      height: 60,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: Colors.blue,
